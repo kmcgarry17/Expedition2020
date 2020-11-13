@@ -14,10 +14,11 @@ def cast_to_xarray(file, stnno):
     depth    = cast['DEPTH']
     temperature = cast['TEMP']
     salinity    = cast['PSAL']
+    fluorescence = cast['wetStar']
     
     # put the data in a dictionary
     datadic = { 'depth' : depth, 'temperature' : temperature,
-               'salinity' : salinity}
+               'salinity' : salinity, 'fluorescence' : fluorescence}
     
     # convert the dictionary to a pandas dataframe
     castdf=pd.DataFrame.from_dict(datadic)
