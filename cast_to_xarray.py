@@ -15,10 +15,12 @@ def cast_to_xarray(file, stnno):
     temperature = cast['TEMP']
     salinity    = cast['PSAL']
     fluorescence = cast['wetStar']
+    oxygen = cast['sbox0Mm/Kg']
     
     # put the data in a dictionary
     datadic = { 'depth' : depth, 'temperature' : temperature,
-               'salinity' : salinity, 'fluorescence' : fluorescence}
+               'salinity' : salinity, 'fluorescence' : fluorescence,
+              'oxygen' : oxygen}
     
     # convert the dictionary to a pandas dataframe
     castdf=pd.DataFrame.from_dict(datadic)
@@ -29,5 +31,6 @@ def cast_to_xarray(file, stnno):
     castxr = castxr.assign_coords({'latitude': xr.DataArray(cast.attributes['LATITUDE']),
                                    'longitude' : xr.DataArray(cast.attributes['LONGITUDE']),
                                  'station':stnno})
+
     
     return castxr
